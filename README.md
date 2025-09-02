@@ -47,5 +47,5 @@ A full-stack MERN blog application with AI-powered content generation, built wit
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/quickblog.git
+git clone https://github.com/Chandu-rgukt/Quick-Blog.git
 cd quickblog
