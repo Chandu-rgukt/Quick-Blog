@@ -1,7 +1,7 @@
 import React from 'react'
 import { assets } from '../../assets/assets'
 import { Outlet, useNavigate } from 'react-router-dom'
-import SideBar from '../../components/admin/SideBar.jsx'
+import SideBar from '../../components/admin/Sidebar.jsx'
 import { useAppContext } from '../../context/AppContext'
 
 function Layout() {
