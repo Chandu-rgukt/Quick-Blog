@@ -72,8 +72,8 @@ export const deleteBlogById = async (req, res) => {
 
 export const togglePublish = async (req, res) => {
     try {
-        const { blogId } = req.params;
-        const blog = await Blog.findById(blogId);
+        const { id } = req.params;
+        const blog = await Blog.findById(id);
         if (!blog) {
             return res.status(404).json({ success: false, message: "Blog not found" });
         }
@@ -107,8 +107,12 @@ export const getCommentsByBlogId = async (req, res) => {
 
 export const generateContent = async (req, res) => {
     try {
-        const { prompt } = req.body;
-        const content=await main(prompt + " generate in a blog post format");
+        const { prompt, description } = req.body;
+        let aiPrompt = `Generate a blog post in a blog post format (Markdown). Title: "${prompt}".`;
+        if (description && description.trim()) {
+            aiPrompt += ` Use the following description/outline/keywords as context or guidelines for the post: "${description}".`;
+        }
+        const content = await main(aiPrompt);
         res.json({ success: true, content });
     } catch (error) {
         console.error("Generate Content Error:", error);

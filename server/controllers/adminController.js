@@ -5,6 +5,12 @@ import Comment from '../models/Comments.js';
 export const adminLogin = async (req, res) => {
     try{
         const { email, password } = req.body;
+        console.log("LOGIN ATTEMPT:");
+        console.log("  Incoming Email:", JSON.stringify(email));
+        console.log("  Expected Email:", JSON.stringify(process.env.ADMIN_EMAIL));
+        console.log("  Incoming Password:", JSON.stringify(password));
+        console.log("  Expected Password:", JSON.stringify(process.env.ADMIN_PASSWORD));
+        
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
             const token = jwt.sign({ email }, process.env.JWT_SECRET);
             return res.json({success:true, token });
@@ -13,6 +19,7 @@ export const adminLogin = async (req, res) => {
         }
 
 
+        
     }catch(error){
         res.json({success:false, message: "Internal server error" });
 

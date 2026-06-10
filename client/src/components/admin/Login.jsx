@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { useAppContext } from '../../context/AppContext.jsx';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const {axios, navigate, setToken} = useAppContext();
@@ -23,6 +24,7 @@ const Login = () => {
             toast.error(error.message);
         }
     }
+    
   return (
     <div className='flex items-center justify-center h-screen'>
         <div className='w-full max-w-sm p-6 max-md:m-6 border primary/30
@@ -57,3 +59,4 @@ const Login = () => {
 }
 
 export default Login
+

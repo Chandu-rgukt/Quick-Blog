@@ -3,7 +3,7 @@ import { assets, blogCategories } from "../../assets/assets";
 import { useAppContext } from "../../context/AppContext.jsx";
 import Quill from "quill";
 import toast from "react-hot-toast";
-import {parse} from 'marked';
+import { marked } from 'marked';
 
 
 function AddBlog({onBlogAdded}) {
@@ -24,9 +24,13 @@ function AddBlog({onBlogAdded}) {
        if(!title) return toast.error("Please enter a title first");
        try{
         setLoading(true);
-        const { data } = await axios.post("/api/blogs/generate", { prompt: title });
+        const descriptionText = quilRef.current ? quilRef.current.getText().trim() : "";
+        const { data } = await axios.post("/api/blogs/generate", { 
+          prompt: title, 
+          description: descriptionText 
+        });
         if (data.success) {
-          quilRef.current.root.innerHTML = parse(data.content);
+          quilRef.current.root.innerHTML = marked.parse(data.content);
         } else {
           toast.error(data.message);
         }
